@@ -6,7 +6,8 @@ public static class Task1
 {
     public static void Solve()
     {
-        var regex = new Regex("(?=(one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9))", RegexOptions.Compiled);
+        var regex = new Regex("(?=(one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9))",
+            RegexOptions.Compiled);
         var map = new Dictionary<string, ulong>
         {
             ["one"] = 1,
@@ -21,8 +22,8 @@ public static class Task1
         };
 
         ulong result = 0;
-        var line = Console.ReadLine();
-        while (line != "")
+        var lines = Extensions.ConsoleReadAllLines();
+        foreach (var line in lines)
         {
             var matches = regex.Matches(line);
             var first = matches.First().Groups.Values.Last().Value;
@@ -34,8 +35,6 @@ public static class Task1
             {
                 result += (ulong)Math.Pow(10, i) * Parse(res[i]);
             }
-
-            line = Console.ReadLine();
 
             ulong Parse(string str)
             {
