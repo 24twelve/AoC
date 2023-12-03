@@ -62,6 +62,7 @@ public static class Day2
 
     private static IEnumerable<(int Red, int Green, int Blue)> Parse(string input)
     {
+        input += ";";
         var regex1 = new Regex("(Game (?<game>\\d{1,}): )?(?<round>(.*?)(;))", RegexOptions.Compiled);
         var regex2 = new Regex("(?<count>\\d{1,})( )(?<color>.*?)(,|;)", RegexOptions.Compiled);
 

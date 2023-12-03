@@ -6,9 +6,10 @@ public static class Extensions
     {
         var lines = new List<string>();
         var line = Console.ReadLine();
-        while (!string.IsNullOrEmpty(line))
+        while (true)
         {
-            line += ";";
+            if (string.IsNullOrEmpty(line))
+                break;
             lines.Add(line);
             line = Console.ReadLine();
         }
