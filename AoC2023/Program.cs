@@ -4,8 +4,8 @@
     {
         public static void Main(string[] args)
         {
-            Task2.Solve1();
-            Task2.Solve2();
+            Day2.Solve1();
+            Day2.Solve2();
         }
     }
 }

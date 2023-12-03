@@ -2,9 +2,9 @@
 
 namespace AoC2023;
 
-public static class Task1
+public static class Day1
 {
-    public static void Solve()
+    public static void Solve2()
     {
         var regex = new Regex("(?=(one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9))",
             RegexOptions.Compiled);

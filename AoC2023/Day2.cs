@@ -2,8 +2,26 @@
 
 namespace AoC2023;
 
-public static class Task2
+public static class Day2
 {
+    public static void Solve1()
+    {
+        var lines = Extensions.ConsoleReadAllLines();
+
+        var result = 0;
+        for (var i = 0; i < lines.Length; i++)
+        {
+            var takes = Parse(lines[i]);
+            if (AreAllPossible(takes))
+            {
+                var gameNumber = i + 1;
+                result += gameNumber;
+            }
+        }
+
+        Console.WriteLine(result);
+    }
+
     public static void Solve2()
     {
         var lines = Extensions.ConsoleReadAllLines();
@@ -28,24 +46,6 @@ public static class Task2
             if (power == 1)
                 power = 0;
             result += power;
-        }
-
-        Console.WriteLine(result);
-    }
-
-    public static void Solve1()
-    {
-        var lines = Extensions.ConsoleReadAllLines();
-
-        var result = 0;
-        for (var i = 0; i < lines.Length; i++)
-        {
-            var takes = Parse(lines[i]);
-            if (AreAllPossible(takes))
-            {
-                var gameNumber = i + 1;
-                result += gameNumber;
-            }
         }
 
         Console.WriteLine(result);
