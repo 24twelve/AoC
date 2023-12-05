@@ -1,17 +1,17 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AoC2023;
+namespace AoC;
 
 public static class Day3
 {
     public static void Solve2()
     {
-        var input = Extensions.ConsoleReadAllLines().ToArray();
+        var input = Extensions.ConsoleReadLinesUntilEmptyLine().ToArray();
         var width = input[0].Length;
         var height = input.Length;
 
         var map = GetAdjacentCellsMap(input).ToArray();
-        var asterisksToNumbers = GetAsterisksToAdjacentNumbersMap(input, map);
+        var asterisksToNumbers = GetAsterisksToAdjacentNumbersMap(map);
 
         var result = asterisksToNumbers.Values
             .Where(value => value.Count > 1)
@@ -21,17 +21,17 @@ public static class Day3
 
         Console.WriteLine(result);
 
-        List<(int X, int Y)>[][] GetAdjacentCellsMap(string[] lines)
+        IEnumerable<List<(int X, int Y)>[]> GetAdjacentCellsMap(string[] lines)
         {
-            var map = new List<(int X, int Y)>[height][];
+            var cellsMap = new List<(int X, int Y)>[height][];
             var onlyAsterisksRegex = new Regex("\\*", RegexOptions.Compiled);
 
             for (var i = 0; i < height; i++)
             {
-                map[i] = new List<(int X, int Y)>[width];
+                cellsMap[i] = new List<(int X, int Y)>[width];
                 for (var j = 0; j < width; j++)
                 {
-                    map[i][j] = new List<(int X, int Y)>();
+                    cellsMap[i][j] = new List<(int X, int Y)>();
                 }
             }
 
@@ -47,19 +47,19 @@ public static class Day3
                         .ToArray();
                     foreach (var cell in digitAdjacentCells)
                     {
-                        map[cell.Y][cell.X].Add((matchY, matchX));
+                        cellsMap[cell.Y][cell.X].Add((matchY, matchX));
                     }
                 }
             }
 
-            return map;
+            return cellsMap;
         }
 
-        Dictionary<(int X, int Y), List<ulong>> GetAsterisksToAdjacentNumbersMap(string[] lines,
-            List<(int X, int Y)>[][] map)
+        Dictionary<(int X, int Y), List<ulong>> GetAsterisksToAdjacentNumbersMap(
+            List<(int X, int Y)>[][] adjacentCellsMap)
         {
             var regex = new Regex("\\d{1,}", RegexOptions.Compiled);
-            var result = new Dictionary<(int X, int Y), List<ulong>>();
+            var dict = new Dictionary<(int X, int Y), List<ulong>>();
             for (var y = 0; y < height; y++)
             {
                 var matches = regex.Matches(input[y]).ToArray();
@@ -68,28 +68,28 @@ public static class Day3
                     var matchY = y;
                     var number = ulong.Parse(match.Value);
                     var adjacentAsterisks = Enumerable.Range(match.Index, match.Length)
-                        .SelectMany(x => map[matchY][x])
+                        .SelectMany(x => adjacentCellsMap[matchY][x])
                         .Distinct();
 
                     foreach (var adjacentAsterisk in adjacentAsterisks)
                     {
-                        if (result.ContainsKey(adjacentAsterisk))
-                            result[adjacentAsterisk].Add(number);
+                        if (dict.ContainsKey(adjacentAsterisk))
+                            dict[adjacentAsterisk].Add(number);
                         else
                         {
-                            result[adjacentAsterisk] = new List<ulong> { number };
+                            dict[adjacentAsterisk] = new List<ulong> { number };
                         }
                     }
                 }
             }
 
-            return result;
+            return dict;
         }
     }
 
     public static void Solve1()
     {
-        var input = Extensions.ConsoleReadAllLines().ToArray();
+        var input = Extensions.ConsoleReadLinesUntilEmptyLine().ToArray();
         var width = input[0].Length;
         var height = input.Length;
         var adjacentCells = GetAdjacentCellsMap();

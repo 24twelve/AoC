@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AoC2023;
+namespace AoC;
 
 public static class Day2
 {
     public static void Solve1()
     {
-        var lines = Extensions.ConsoleReadAllLines();
+        var lines = Extensions.ConsoleReadLinesUntilEmptyLine();
 
         var result = 0;
         for (var i = 0; i < lines.Length; i++)
@@ -24,7 +24,7 @@ public static class Day2
 
     public static void Solve2()
     {
-        var lines = Extensions.ConsoleReadAllLines();
+        var lines = Extensions.ConsoleReadLinesUntilEmptyLine();
 
         var result = 0;
 

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AoC2023;
+namespace AoC;
 
 public static class Day1
 {
@@ -22,7 +22,7 @@ public static class Day1
         };
 
         ulong result = 0;
-        var lines = Extensions.ConsoleReadAllLines();
+        var lines = Extensions.ConsoleReadLinesUntilEmptyLine();
         foreach (var line in lines)
         {
             var matches = regex.Matches(line);

@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AoC2023;
+namespace AoC;
 
 public static class Day4
 {
     public static void Solve1()
     {
-        var input = Extensions.ConsoleReadAllLines();
+        var input = Extensions.ConsoleReadLinesUntilEmptyLine();
         var result = input
             .Select(card => ProcessCard(card).WinningNumberCount)
             .Where(cardResultPower => cardResultPower > 0)
@@ -17,7 +17,7 @@ public static class Day4
 
     public static void Solve2()
     {
-        var input = Extensions.ConsoleReadAllLines();
+        var input = Extensions.ConsoleReadLinesUntilEmptyLine();
         var processed = input
             .Select(ProcessCard)
             .ToDictionary(key => key.CardNumber, value => value.WinningNumberCount);
