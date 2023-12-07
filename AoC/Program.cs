@@ -1,10 +1,12 @@
-﻿namespace AoC
+﻿using AoC._2023;
+
+namespace AoC
 {
     internal static class Program
     {
         public static void Main(string[] args)
         {
-            Day6.Solve2();
+            Day7.Solve2();
         }
     }
 }
