@@ -6,7 +6,7 @@ namespace AoC
     {
         public static void Main(string[] args)
         {
-            Day7.Solve2();
+            Day9.Solve2();
         }
     }
 }
